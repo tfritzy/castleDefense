@@ -1,0 +1,288 @@
+fileFormatVersion: 2
+guid: 6798480da29f25742a19e531e61eb32f
+timeCreated: 1503243756
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: sd13
+    21300002: sd12
+    21300004: sd11
+    21300006: sd10
+    21300008: sd9
+    21300010: sd8
+    21300012: sd7
+    21300014: sd6
+    21300016: sd5
+    21300018: sd4
+    21300020: sd3
+    21300022: sd2
+    21300024: sd1
+    21300026: sd0
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sd13
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 0
+        width: 425
+        height: 365
+      alignment: 9
+      pivot: {x: 0.58112967, y: 0.015608019}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd12
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 0
+        width: 412
+        height: 365
+      alignment: 9
+      pivot: {x: 0.62642497, y: 0.01158817}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd11
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 0
+        width: 383
+        height: 365
+      alignment: 9
+      pivot: {x: 0.64557505, y: 0.009578245}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd10
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 348
+        height: 365
+      alignment: 9
+      pivot: {x: 0.7255677, y: 0.0055583953}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd9
+      rect:
+        serializedVersion: 2
+        x: 1987
+        y: 0
+        width: 352
+        height: 365
+      alignment: 9
+      pivot: {x: 0.735509, y: 0.009578245}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd8
+      rect:
+        serializedVersion: 2
+        x: 2382
+        y: 0
+        width: 325
+        height: 365
+      alignment: 9
+      pivot: {x: 0.69412786, y: 0.01158817}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd7
+      rect:
+        serializedVersion: 2
+        x: 2757
+        y: 0
+        width: 282
+        height: 365
+      alignment: 9
+      pivot: {x: 0.7913671, y: 0.0035484706}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd6
+      rect:
+        serializedVersion: 2
+        x: 3054
+        y: 0
+        width: 273
+        height: 365
+      alignment: 9
+      pivot: {x: 0.80903465, y: 0.009578245}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd5
+      rect:
+        serializedVersion: 2
+        x: 3329
+        y: 0
+        width: 181
+        height: 365
+      alignment: 9
+      pivot: {x: 0.8647839, y: 0.0035484706}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd4
+      rect:
+        serializedVersion: 2
+        x: 3535
+        y: 0
+        width: 117
+        height: 365
+      alignment: 9
+      pivot: {x: 0.8135141, y: 0.0055583953}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd3
+      rect:
+        serializedVersion: 2
+        x: 3724
+        y: 0
+        width: 145
+        height: 365
+      alignment: 9
+      pivot: {x: 0.62648505, y: -0.0044912286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd2
+      rect:
+        serializedVersion: 2
+        x: 3915
+        y: 0
+        width: 150
+        height: 365
+      alignment: 9
+      pivot: {x: 0.59781575, y: 0.01158817}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd1
+      rect:
+        serializedVersion: 2
+        x: 4087
+        y: 0
+        width: 158
+        height: 365
+      alignment: 9
+      pivot: {x: 0.6630253, y: 0.005376197}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sd0
+      rect:
+        serializedVersion: 2
+        x: 4269
+        y: 0
+        width: 81
+        height: 361
+      alignment: 9
+      pivot: {x: 0.61773604, y: 0.010240798}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

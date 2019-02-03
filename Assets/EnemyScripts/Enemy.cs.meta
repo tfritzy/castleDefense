@@ -1,0 +1,34 @@
+fileFormatVersion: 2
+guid: a5bf3ff4264d22341b2e00306bc64f1c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - goldDrop: {fileID: 1574999637609924, guid: 6e4220075c38b924180d595361c592cc, type: 2}
+  - target: {instanceID: 0}
+  - rangedAttack: {instanceID: 0}
+  - damageLabel: {instanceID: 0}
+  - dyingAnimation: {instanceID: 0}
+  - soulGem: {fileID: 1836136662409100, guid: 13d9757e08bd0db41bf32b64ad28c4fb, type: 2}
+  - castle: {instanceID: 0}
+  - arrowBarrageAbilityDrop: {fileID: 1999762275806556, guid: 776291a71eac491478100d35506570ef,
+      type: 2}
+  - arrowMinigunAbilityDrop: {fileID: 1832179383477932, guid: 2c90b6e843e305b48bdd58c7556d3251,
+      type: 2}
+  - caltropsAbilityDrop: {fileID: 1976579042474794, guid: db34d1651e16c1346bef73fb254538bc,
+      type: 2}
+  - barrierAbilityDrop: {fileID: 1610433348015666, guid: 9f32dff852c3af94094c1e2693e46dd3,
+      type: 2}
+  - fireWaveAbilityDrop: {fileID: 1148330178441794, guid: e77e68e10606a724d8eb4e4a59852957,
+      type: 2}
+  - blizzardAbilityDrop: {fileID: 1151789976208916, guid: 4970644a459fcb748b7c96480a7cbb1a,
+      type: 2}
+  - fanOfBoltsAbilityDrop: {fileID: 1484524045420170, guid: 743547893d7a1f74aa968e586e1ee604,
+      type: 2}
+  - explosiveShotAbilityDrop: {fileID: 1870253307503644, guid: 2429a6b7854c87646b0239871994d2b7,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: bd499d2503a687345886f42361a7c5db
+timeCreated: 1527962338
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 80
+  forceTextureCase: -1
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cube Cavern
+  fontNames:
+  - Cube Cavern
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,346 @@
+fileFormatVersion: 2
+guid: 73eb57ca9872cc444813e79a1e30a735
+timeCreated: 1530062088
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: HorsePieces_0
+    21300002: HorsePieces_1
+    21300004: HorsePieces_2
+    21300006: HorsePieces_3
+    21300008: HorsePieces_4
+    21300010: HorsePieces_5
+    21300012: HorsePieces_6
+    21300014: HorsePieces_7
+    21300016: HorsePieces_8
+    21300018: HorsePieces_9
+    21300020: HorsePieces_10
+    21300022: HorsePieces_11
+    21300024: HorsePieces_12
+    21300026: HorsePieces_13
+    21300028: HorsePieces_14
+    21300030: HorsePieces_15
+    21300032: HorsePieces_16
+    21300034: HorsePieces_17
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 1
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HorsePieces_0
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 2390
+        width: 479
+        height: 520
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_1
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 2264
+        width: 773
+        height: 630
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_2
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1479
+        width: 1527
+        height: 637
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_4
+      rect:
+        serializedVersion: 2
+        x: 2431
+        y: 1278
+        width: 335
+        height: 896
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_5
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 754
+        width: 314
+        height: 685
+      alignment: 9
+      pivot: {x: 0.5087538, y: 0.81700253}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_6
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 701
+        width: 306
+        height: 709
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7990872}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_7
+      rect:
+        serializedVersion: 2
+        x: 2695
+        y: 1253
+        width: 5
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_8
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 207
+        width: 236
+        height: 435
+      alignment: 9
+      pivot: {x: 0.75620914, y: 0.91697437}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_9
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 166
+        width: 202
+        height: 447
+      alignment: 9
+      pivot: {x: 0.6362105, y: 0.9083768}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_10
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 503
+        width: 492
+        height: 722
+      alignment: 9
+      pivot: {x: 0.48323965, y: 0.7741079}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_11
+      rect:
+        serializedVersion: 2
+        x: 2283
+        y: 533
+        width: 546
+        height: 716
+      alignment: 9
+      pivot: {x: 0.5050344, y: 0.7898411}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_12
+      rect:
+        serializedVersion: 2
+        x: 2750
+        y: 525
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_13
+      rect:
+        serializedVersion: 2
+        x: 1952
+        y: 494
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_14
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 472
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_15
+      rect:
+        serializedVersion: 2
+        x: 2672
+        y: 23
+        width: 191
+        height: 454
+      alignment: 9
+      pivot: {x: 0.24099363, y: 0.9162062}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_16
+      rect:
+        serializedVersion: 2
+        x: 1701
+        y: 5
+        width: 292
+        height: 419
+      alignment: 9
+      pivot: {x: 0.8247593, y: 0.90343344}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorsePieces_17
+      rect:
+        serializedVersion: 2
+        x: 2151
+        y: 123
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
