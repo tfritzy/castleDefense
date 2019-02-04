@@ -83,6 +83,7 @@ public class GameControl : MonoBehaviour {
     public int pounderTowerLevel;
     public int torrentTowerLevel;
     public int flakTowerLevel;
+    public int axeTowerLevel;
 
 	void Awake(){
 		if (control == null) {
@@ -180,6 +181,7 @@ public class GameControl : MonoBehaviour {
         data.pounderTowerLevel = GameControl.control.pounderTowerLevel;
         data.torrentTowerlevel = GameControl.control.torrentTowerLevel;
         data.flakTowerLevel = GameControl.control.flakTowerLevel;
+        data.axeTowerLevel = GameControl.control.axeTowerLevel;
 
         Debug.Log("Gamecontrol save");
 		bf.Serialize (file, data);
@@ -273,6 +275,7 @@ public class GameControl : MonoBehaviour {
             this.pounderTowerLevel = data.pounderTowerLevel;
             this.torrentTowerLevel = data.torrentTowerlevel;
             this.flakTowerLevel = data.flakTowerLevel;
+            this.axeTowerLevel = data.axeTowerLevel;
 
             if (this.gameLevel == 0) {
 				this.gameLevel = 1;
@@ -355,5 +358,6 @@ class PlayerData{
     public int pounderTowerLevel;
     public int torrentTowerlevel;
     public int flakTowerLevel;
+    public int axeTowerLevel;
 }
 
