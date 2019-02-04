@@ -19,6 +19,7 @@ public class TeslaTower : Tower {
         projectileDamage = 5 + level * 2;
         range = 5 + level;
         canShootAir = true;
+        canShootGround = true;
         isRangedTower = true;
         attackSpeed = 6 * Mathf.Pow(.8f, level);
         projMovementSpeed = 0;

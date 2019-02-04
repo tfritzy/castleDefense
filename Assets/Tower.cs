@@ -7,6 +7,7 @@ public class Tower : MonoBehaviour {
     public int level;
     public bool isRangedTower;
     public bool canShootAir;
+    public bool canShootGround;
     public float range;
     public float attackSpeed;
     public GameObject projectile;
@@ -54,6 +55,10 @@ public class Tower : MonoBehaviour {
         foreach (GameObject enemy in enemies)
         {
             if (!canShootAir && enemy.GetComponent<Enemy>().isFlyer)
+            {
+                continue;
+            }
+            if (!canShootGround && !enemy.GetComponent<Enemy>().isFlyer)
             {
                 continue;
             }
