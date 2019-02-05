@@ -84,6 +84,7 @@ public class GameControl : MonoBehaviour {
     public int torrentTowerLevel;
     public int flakTowerLevel;
     public int axeTowerLevel;
+    public int fireBoltTowerlevel;
 
 	void Awake(){
 		if (control == null) {
@@ -182,6 +183,7 @@ public class GameControl : MonoBehaviour {
         data.torrentTowerlevel = GameControl.control.torrentTowerLevel;
         data.flakTowerLevel = GameControl.control.flakTowerLevel;
         data.axeTowerLevel = GameControl.control.axeTowerLevel;
+        data.fireBoltTowerlevel = GameControl.control.fireBoltTowerlevel;
 
         Debug.Log("Gamecontrol save");
 		bf.Serialize (file, data);
@@ -276,6 +278,7 @@ public class GameControl : MonoBehaviour {
             this.torrentTowerLevel = data.torrentTowerlevel;
             this.flakTowerLevel = data.flakTowerLevel;
             this.axeTowerLevel = data.axeTowerLevel;
+            this.fireBoltTowerlevel = data.fireBoltTowerlevel;
 
             if (this.gameLevel == 0) {
 				this.gameLevel = 1;
@@ -359,5 +362,5 @@ class PlayerData{
     public int torrentTowerlevel;
     public int flakTowerLevel;
     public int axeTowerLevel;
+    public int fireBoltTowerlevel;
 }
-

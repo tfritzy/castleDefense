@@ -56,7 +56,7 @@ public class ExplosiveShot : MonoBehaviour {
 	}
 
 	public void Fire(){
-		GameObject ep = Instantiate (this.explosiveProjectile);
+		GameObject ep = Instantiate (this.explosiveProjectile, null);
 		
         Vector3 startLocation = GameObject.Find("Ballista1").gameObject.transform.position;
         startLocation.z = 0;

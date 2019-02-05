@@ -24,7 +24,7 @@ public class LevelManager: MonoBehaviour {
 
 	// timing
 	public float enemyTimeSpawn = .5f;
-	private float levelTimeLength = 60f;
+	private float levelTimeLength = 120f;
 	private float levelEndTime;
 	private float levelStartTime;
 	private float lastEnemyUpdateTime;
@@ -71,6 +71,8 @@ public class LevelManager: MonoBehaviour {
     public GameObject youDied;
     public bool isDead;
     private float deathTime;
+
+    private Animator lightSourceAnimator;
 
 	void Start(){
 		if (manager == null) {
@@ -156,6 +158,8 @@ public class LevelManager: MonoBehaviour {
 		SetupGameObjectsWithTag ("Castle");
 		SetupGameObjectsWithTag ("Ally");
 
+        lightSourceAnimator = GameObject.Find("Sun Light Source").GetComponent<Animator>();
+        lightSourceAnimator.speed = 90f / levelTimeLength;
 	}
 
     private void SpawnArchers()
@@ -244,7 +248,9 @@ public class LevelManager: MonoBehaviour {
 		this.level = GameControl.control.gameLevel;
 		LevelSetup ();
         SetLevelGoingForBallistas(true);
-	}
+        lightSourceAnimator.SetBool("isLevelGoing", true);
+
+    }
 		
 
 	// Update is called once per frame
@@ -496,7 +502,8 @@ public class LevelManager: MonoBehaviour {
             coin.SendMessage("Reward");
         }
 
-        
+        lightSourceAnimator.SetBool("isLevelGoing", false);
+
         // Remove the barrier if it's present.
         Destroy(GameObject.Find("Barrier"));
 

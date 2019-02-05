@@ -75,45 +75,46 @@ public class Ballista : MonoBehaviour {
             }
 
             // load progress on bolt
-            if (Input.GetMouseButton(0) || Input.touchCount > 0)
+            
+            
+            loadProgress = Mathf.Min((Time.time - lastAttackTime) / maxPower, 1.0f);
+            if (this.boltInst == null)
             {
-                loadProgress = Mathf.Min((Time.time - lastAttackTime) / maxPower, 1.0f);
-                if (this.boltInst == null)
-                {
-                    this.boltInst = Instantiate(bolt, bow.transform);
-                    this.boltInst.transform.position = this.transform.position;
-                    this.boltInst.GetComponent<Rigidbody2D>().gravityScale = 0f;
-                }
+                this.boltInst = Instantiate(bolt, bow.transform);
+                this.boltInst.transform.position = this.transform.position;
+                this.boltInst.GetComponent<Rigidbody2D>().gravityScale = 0f;
+            }
 
-                this.boltInst.transform.localPosition = new Vector2(6.5f + -1f * loadProgress * 4f, .2f);
+            this.boltInst.transform.localPosition = new Vector2(6.5f + -1f * loadProgress * 4f, .2f);
 
-                //rotate the crank
-                if (loadProgress != 1.0f) { 
-                    Vector3 crankRotation = crank.transform.rotation.eulerAngles;
-                    crankRotation.z += 5f;
-                    crank.transform.eulerAngles = new Vector3(crankRotation.x, crankRotation.y, crankRotation.z);
-                }
-                Vector3 touchLocation = Vector3.zero;
-                if (Input.touchCount > 0)
-                {
-                    touchLocation = cam.ScreenToWorldPoint((Vector3)Input.GetTouch(0).position);
-                }
-                if (Input.GetMouseButton(0))
-                {
-                    touchLocation = cam.ScreenToWorldPoint((Vector3)Input.mousePosition);
-                }
-                lastTouch = touchLocation;
+            //rotate the crank
+            if (loadProgress != 1.0f) { 
+                Vector3 crankRotation = crank.transform.rotation.eulerAngles;
+                crankRotation.z += 5f;
+                crank.transform.eulerAngles = new Vector3(crankRotation.x, crankRotation.y, crankRotation.z);
+            }
+            Vector3 touchLocation = Vector3.zero;
+            if (Input.touchCount > 0)
+            {
+                touchLocation = cam.ScreenToWorldPoint((Vector3)Input.GetTouch(0).position);
+            }
+            if (Input.GetMouseButton(0))
+            {
+                touchLocation = cam.ScreenToWorldPoint((Vector3)Input.mousePosition);
+            }
+            lastTouch = touchLocation;
 
+             
+            if ((Input.GetMouseButton(0) || Input.touchCount > 0) )
+            {
                 Vector2 touchDiff = (Vector2)lastTouch - (Vector2)bow.transform.position;
                 Quaternion newRotation = transform.rotation;
                 newRotation.z = Mathf.Rad2Deg * Mathf.Atan(touchDiff.y / touchDiff.x);
                 bow.transform.eulerAngles = new Vector3(newRotation.x, newRotation.y, newRotation.z);
                 this.boltInst.transform.eulerAngles = new Vector3(newRotation.x, newRotation.y, newRotation.z);
-            }
-            else
-            {
+
                 // fire bolt!
-                if (loadProgress > 0)
+                if (loadProgress > 0 && Time.time > lastAttackTime + .2f)
                 {
                     if (lastTouch != Vector3.zero)
                     {

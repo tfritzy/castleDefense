@@ -22,6 +22,8 @@ public class SuicideBomber : Enemy {
 	}
 
 	protected override void attack(){
+        if (target == null)
+            return;
         float distance = target.GetComponent<Collider2D>().Distance(this.GetComponent<Collider2D>()).distance;
 		if (distance <= attackRange) {
 			target.SendMessage ("TakeDamage", this.attackDamage);
