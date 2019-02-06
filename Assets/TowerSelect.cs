@@ -31,15 +31,12 @@ public class TowerSelect : MonoBehaviour {
                 else
                     touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 diffVect = touchPos - (Vector2)this.transform.position;
-                Debug.Log(diffVect);
                 if (diffVect.magnitude > 4f)
                     CloseMenu();
 
             }
         }
 	}
-
-    
 
     public void OnClick()
     {

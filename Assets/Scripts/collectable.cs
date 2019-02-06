@@ -54,7 +54,6 @@ public abstract class collectable : MonoBehaviour {
 				this.GetComponent<Rigidbody2D> ().velocity = new Vector2(diff.x * 3f, diff.y * 3f);
 			} else {
                 GiveValue();
-                GameObject.Find("Purchase").SendMessage("StyleForBallista");
 				Destroy (this.gameObject);
 			}
 

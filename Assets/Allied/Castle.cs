@@ -44,7 +44,7 @@ public class Castle : MonoBehaviour {
 
 	private void GameLose(){
 
-        GameObject.Find("LevelManager").SendMessage("EndLevel");
+        GameObject.Find("LevelManager").SendMessage("LoseLevel");
         this.isDead = false;
 
 	}

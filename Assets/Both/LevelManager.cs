@@ -21,6 +21,7 @@ public class LevelManager: MonoBehaviour {
 	public float enemyHealthFactor;
 
 	public GameObject upgradeUI;
+    private GameObject upgradeUIInst;
 
 	// timing
 	public float enemyTimeSpawn = .5f;
@@ -50,8 +51,6 @@ public class LevelManager: MonoBehaviour {
 	public List<float> timeRemainingUntilNextSpawnForEachEnemy;
 	public float[] baseSpawnRatesForEachEnemy;
 
-	private bool isMovingUI;
-	private bool isMovingUIUp;
 
 	private static LevelManager manager;
 	public GameObject allyMage;
@@ -74,23 +73,59 @@ public class LevelManager: MonoBehaviour {
 
     private Animator lightSourceAnimator;
 
-	void Start(){
+	void Start() {
 		if (manager == null) {
 			manager = this;
 			this.isLevelGoing = false;
             SetLevelGoingForBallistas(false);
-
-		} else {
+            LoadGame();
+        } else {
 			Destroy (this.gameObject);
 		}
 	}
 
+    void LoadGame()
+    {
+        EventManager.OnLevelStart += LevelSetup;
+        EventManager.OnLevelEnd += EndLevel;
+        enemies = new GameObject[] { farmer, soldier, demon, suicideBomber, catapult, knight, witch };
+        GameControl.control.load();
+        lightSourceAnimator = GameObject.Find("Sun Light Source").GetComponent<Animator>();
+        lightSourceAnimator.speed = 90f / levelTimeLength;
+        OpenMenu();
+    } 
 
-	void LevelSetup(){
+    private void OnDisable()
+    {
+        EventManager.OnLevelStart -= LevelSetup;
+    }
 
-		enemies = new GameObject[]{ farmer, soldier, demon, suicideBomber, catapult, knight, witch};
-		GameControl.control.load ();
-		this.level = GameControl.control.gameLevel;
+    public static void StartLevel()
+    {
+        EventManager.StartLevel();
+    }
+
+    void OpenMenu()
+    {
+        upgradeUIInst = Instantiate(upgradeUI, GameObject.Find("UI").transform);
+    }
+
+    void CloseMenu()
+    {
+        if (upgradeUIInst != null)
+            Destroy(upgradeUIInst);
+    }
+
+    void LevelSetup(){
+
+        CloseMenu();
+
+        this.isLevelGoing = true;
+        GameControl.control.load();
+        this.level = GameControl.control.gameLevel;
+        SetLevelGoingForBallistas(true); // TODO change this to event system.
+        lightSourceAnimator.SetBool("isLevelGoing", true);
+
 		this.levelEndTime = Time.time + this.levelTimeLength;
 		this.levelStartTime = Time.time;
 		this.upgradeCanvas = GameObject.Find ("UpgradeCanvas");
@@ -100,8 +135,10 @@ public class LevelManager: MonoBehaviour {
         {
             Time.timeScale = 10;
         }
-        
 
+        if (upgradeUIInst != null)
+            Destroy(upgradeUIInst);
+        
         // Reset the average damage.
         GameControl.control.averageDamage = 0;
         GameControl.control.damageCount = 0;
@@ -117,9 +154,6 @@ public class LevelManager: MonoBehaviour {
 		this.baseSpawnRatesForEachEnemy = GetSpawnRates(this.level);
 		timeRemainingUntilNextSpawnForEachEnemy = new List<float> ();
 
-
-		this.isMovingUI = true;
-		this.isMovingUIUp = false;
 
 		for (int i = 0; i < enemies.Length; i++){
 			float spawnTime = this.baseSpawnRatesForEachEnemy [i];
@@ -158,8 +192,7 @@ public class LevelManager: MonoBehaviour {
 		SetupGameObjectsWithTag ("Castle");
 		SetupGameObjectsWithTag ("Ally");
 
-        lightSourceAnimator = GameObject.Find("Sun Light Source").GetComponent<Animator>();
-        lightSourceAnimator.speed = 90f / levelTimeLength;
+        
 	}
 
     private void SpawnArchers()
@@ -236,25 +269,169 @@ public class LevelManager: MonoBehaviour {
         }
     }
 
+    void OnApplicationStop()
+    {
+        GameControl.control.save();
+    }
+
+    void SpawnEnemies()
+    {
+        if (Time.time > lastEnemyUpdateTime + 1.0f)
+        {
+
+            float timeDif = Time.time - lastEnemyUpdateTime;
+            for (int i = 0; i < timeRemainingUntilNextSpawnForEachEnemy.Count; i++)
+            {
+                timeRemainingUntilNextSpawnForEachEnemy[i] -= timeDif;
+                if (timeRemainingUntilNextSpawnForEachEnemy[i] <= 0)
+                {
 
 
-	void OnApplicationStop() {
-		GameControl.control.save ();
-	}
+                    // Choose the number of enemies to spawn.
+                    int enemyRand = UnityEngine.Random.Range(0, 20);
 
-	void Go(){
-		this.isLevelGoing = true;
-		GameControl.control.load ();
-		this.level = GameControl.control.gameLevel;
-		LevelSetup ();
-        SetLevelGoingForBallistas(true);
-        lightSourceAnimator.SetBool("isLevelGoing", true);
+                    //Spawn packs of enemies if it's time to do so.
+                    if (Time.time > this.packOneSpawnTime)
+                    {
+                        SpwanPack();
+                        this.packOneSpawnTime = Time.time + 100000;
+                    }
+                    if (Time.time > this.packTwoSpawnTime)
+                    {
+                        SpwanPack();
+                        this.packTwoSpawnTime = Time.time + 100000;
+                    }
+
+
+
+                    int enemyCount = 1;
+
+                    // Decide whether this is a unique pack
+                    bool isUniquePack = false;
+                    if (this.numberOfUniquePacksSpawned < this.numberOfUniquePacksToSpwan && (Time.time > this.lastUniqueSpawnTime + this.timeBetweenUniquePacks))
+                    {
+
+                        isUniquePack = true;
+                        this.numberOfUniquePacksSpawned += 1;
+                        this.lastUniqueSpawnTime = Time.time;
+                        // Uniques spawn in groups of 3. 
+                        enemyCount = 3;
+                    }
+                    for (int j = 0; j < enemyCount; j++)
+                    {
+
+                        // spawn the enemy in a random locaiton if it's spawning alone.
+                        int locationModifier = j * 15;
+                        if (enemyCount == 1)
+                        {
+                            locationModifier = UnityEngine.Random.Range(0, 40);
+                        }
+
+                        GameObject newEnemy = Instantiate(enemies[i]);
+                        Enemy enemyScript = newEnemy.GetComponent<Enemy>();
+                        // If it's a unique pack make the enemy unique. 
+                        if (isUniquePack)
+                        {
+                            newEnemy.GetComponent<Enemy>().SetIsGiant();
+                            SpriteRenderer[] sprites = newEnemy.GetComponentsInChildren<SpriteRenderer>();
+
+                            foreach (SpriteRenderer sprite in sprites)
+                            {
+                                sprite.color = new Color(0, 1f, 1f);
+                                newEnemy.GetComponent<Enemy>().startingColor = new Color(0, 1f, 1f);
+                            }
+                        }
+                        newEnemy.GetComponent<Rigidbody2D>().gravityScale = 0;
+                        float yLoc = groundLevel - 1f;
+                        if (newEnemy.GetComponent<Enemy>().isFlyer)
+                        {
+                            yLoc = UnityEngine.Random.Range(groundLevel + 4f, 4f);
+                        }
+                        newEnemy.transform.position = new Vector3(19f - .05f * locationModifier, yLoc + .03f * locationModifier, locationModifier * .1f);
+                    }
+                    timeRemainingUntilNextSpawnForEachEnemy[i] = UnityEngine.Random.Range(this.baseSpawnRatesForEachEnemy[i] / 1.25f, this.baseSpawnRatesForEachEnemy[i] * .5f);
+                }
+            }
+
+            this.lastEnemyUpdateTime = Time.time;
+        }
+    }
+
+    void EndLevel()
+    {
+        // Restore castle to full health. 
+        GameObject.Find("Castle").SendMessage("Start");
+
+        GameControl.control.gameLevel += 1;
+        GameControl.control.save();
+        levelOver = true;
+        this.isLevelGoing = false;
+        SetLevelGoingForBallistas(false);
+
+        OpenMenu();
+    }
+
+    void WinLevel()
+    {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && GameObject.FindGameObjectsWithTag("Money").Length == 0)
+        {
+            EventManager.EndLevel();
+        }
+    }
+
+    public void LoseLevel()
+    {
+        // break out of method if death logic has already happened.
+        if (isDead)
+        {
+            return;
+        }
+        isDead = true;
+        isLevelGoing = false;
+
+        // Destroy the remaining enemies
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        // Collect the money on the ground
+        GameObject[] money = GameObject.FindGameObjectsWithTag("Money");
+        foreach (GameObject coin in money)
+        {
+            coin.SendMessage("Reward");
+        }
+
+        lightSourceAnimator.SetBool("isLevelGoing", false);
+
+        // Remove the barrier if it's present.
+        Destroy(GameObject.Find("Barrier"));
+
+        // Collect the money on the ground
+        GameObject[] enemyProjectiles = GameObject.FindGameObjectsWithTag("EnemyProjectile");
+        foreach (GameObject enemyProj in enemyProjectiles)
+        {
+            Destroy(enemyProj);
+        }
+        GameControl.control.gameLevel -= 1;
+
+        if (GameObject.Find("YouDied") == null)
+        {
+            GameObject deathLabel = Instantiate(this.youDied, GameObject.Find("UI").transform);
+            deathLabel.name = "YouDied";
+            Debug.Log("Making a death thingy");
+        }
+        SetLevelGoingForBallistas(false);
+        deathTime = Time.time;
+
+
+
 
     }
-		
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
 		
         if (isDead)
         {
@@ -263,132 +440,21 @@ public class LevelManager: MonoBehaviour {
                 GameControl.control.save();
                 levelOver = true;
                 this.isLevelGoing = false;
-                SetLevelGoingForBallistas(false);
+                
                 Destroy(GameObject.Find("YouDied"));
-                this.isMovingUI = true;
-                this.isMovingUIUp = true;
-                SetupUpgradeMenu();
+                EventManager.EndLevel();
             }
             return;
         }
 
-		if (isMovingUI) {
-			if (isMovingUIUp) {
-				upgradeCanvas.GetComponent<Animator> ().SetTrigger ("GoUp");
-				isMovingUI = false;
-				this.isMovingUIUp = false;
-			} else {
-				upgradeCanvas.GetComponent<Animator> ().SetTrigger ("GoDown");
-				isMovingUI = false;
-			}
-		} else { 
-			if (isLevelGoing) {
-				if (Time.time < this.levelEndTime) {
-					if (Time.time > lastEnemyUpdateTime + 1.0f){
-
-						float timeDif = Time.time - lastEnemyUpdateTime;
-						for (int i = 0; i < timeRemainingUntilNextSpawnForEachEnemy.Count; i++) {
-                            timeRemainingUntilNextSpawnForEachEnemy[i] -= timeDif;
-							if (timeRemainingUntilNextSpawnForEachEnemy [i] <= 0) {
-                                
-
-                                // Choose the number of enemies to spawn.
-                                int enemyRand = UnityEngine.Random.Range(0, 20);
-                                
-                                //Spawn packs of enemies if it's time to do so.
-                                if (Time.time > this.packOneSpawnTime)
-                                {
-                                    SpwanPack();
-                                    this.packOneSpawnTime = Time.time + 100000;
-                                }
-                                if (Time.time > this.packTwoSpawnTime)
-                                {
-                                    SpwanPack();
-                                    this.packTwoSpawnTime = Time.time + 100000;
-                                }
-                                
-
-                                
-                                int enemyCount = 1;
-
-                                // Decide whether this is a unique pack
-                                bool isUniquePack = false;
-                                if (this.numberOfUniquePacksSpawned < this.numberOfUniquePacksToSpwan && (Time.time> this.lastUniqueSpawnTime + this.timeBetweenUniquePacks))
-                                {
-
-                                    isUniquePack = true;
-                                    this.numberOfUniquePacksSpawned += 1;
-                                    this.lastUniqueSpawnTime = Time.time;
-                                    // Uniques spawn in groups of 3. 
-                                    enemyCount = 3;
-                                }
-                                for (int j = 0; j < enemyCount; j++){
-
-                                    // spawn the enemy in a random locaiton if it's spawning alone.
-                                    int locationModifier = j * 15;
-                                    if (enemyCount == 1)
-                                    {
-                                        locationModifier = UnityEngine.Random.Range(0, 40);
-                                    }
-
-                                    GameObject newEnemy = Instantiate (enemies [i]);
-                                    Enemy enemyScript = newEnemy.GetComponent<Enemy>();
-                                    // If it's a unique pack make the enemy unique. 
-                                    if (isUniquePack)
-                                    {
-                                        newEnemy.GetComponent<Enemy>().SetIsGiant();
-                                        SpriteRenderer[] sprites = newEnemy.GetComponentsInChildren<SpriteRenderer>();
-
-                                        foreach (SpriteRenderer sprite in sprites)
-                                        {
-                                            sprite.color = new Color(0, 1f, 1f);
-                                            newEnemy.GetComponent<Enemy>().startingColor = new Color(0, 1f, 1f);
-                                        }
-                                    }
-									newEnemy.GetComponent<Rigidbody2D> ().gravityScale = 0;
-                                    float yLoc = groundLevel - 1f; 
-                                    if (newEnemy.GetComponent<Enemy>().isFlyer)
-                                    {
-                                        yLoc = UnityEngine.Random.Range(groundLevel + 4f, 4f);
-                                    }
-									newEnemy.transform.position = new Vector3 (19f - .05f * locationModifier, yLoc + .03f * locationModifier, locationModifier * .1f);
-								}
-								timeRemainingUntilNextSpawnForEachEnemy [i] = UnityEngine.Random.Range(this.baseSpawnRatesForEachEnemy[i] / 1.25f, this.baseSpawnRatesForEachEnemy [i] * .5f);
-							}
-						}
-
-						this.lastEnemyUpdateTime = Time.time;
-					}
-				} else {
-					if (GameObject.FindGameObjectsWithTag ("Enemy").Length == 0 && GameObject.FindGameObjectsWithTag ("Money").Length == 0) {
-						Debug.Log ("Level OVER! With " + (levelEndTime - Time.time).ToString() + " seconds left");
-
-                        Debug.Log("Wrote to stats file");
-                        System.IO.File.AppendAllText("C:\\development\\stats.csv", GameControl.control.gameLevel + "," + GameControl.control.totalDamageDone + "," + GameControl.control.gold + "," + GameControl.control.totalEnemiesKilled + "\n");
-
-
-                        // Restore castle to full health. 
-                        GameObject.Find("Castle").SendMessage("Start");
-
-                        GameControl.control.gameLevel += 1;
-						GameControl.control.save ();
-						levelOver = true;
-						this.isLevelGoing = false;
-                        SetLevelGoingForBallistas(false);
-                        this.isMovingUI = true;
-						this.isMovingUIUp = true;
-						SetupUpgradeMenu ();
-
-                        /*
-                        if (GameControl.control.autoplay)
-                        {
-                            Go();
-                        }
-                        */
-
-					}
-				}
-			} 
+		if (isLevelGoing) {
+            if (Time.time < this.levelEndTime)
+            {
+                SpawnEnemies();
+            } else {
+                WinLevel();
+            }
+			
 		}
 		
 	}
@@ -479,72 +545,6 @@ public class LevelManager: MonoBehaviour {
         inst.transform.position = startLocation;
 
     }
-
-    public void EndLevel()
-    {
-        // break out of method if death logic has already happened.
-        if (isDead)
-        {
-            return;
-        }
-
-        // Destroy the remaining enemies
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies)
-        {
-            Destroy(enemy);
-        }
-
-        // Collect the money on the ground
-        GameObject[] money = GameObject.FindGameObjectsWithTag("Money");
-        foreach (GameObject coin in money)
-        {
-            coin.SendMessage("Reward");
-        }
-
-        lightSourceAnimator.SetBool("isLevelGoing", false);
-
-        // Remove the barrier if it's present.
-        Destroy(GameObject.Find("Barrier"));
-
-        // Collect the money on the ground
-        GameObject[] enemyProjectiles = GameObject.FindGameObjectsWithTag("EnemyProjectile");
-        foreach (GameObject enemyProj in enemyProjectiles)
-        {
-            Destroy(enemyProj);
-        }
-        GameControl.control.gameLevel -= 1;
-
-        if (GameObject.Find("YouDied") == null)
-        {
-            GameObject deathLabel = Instantiate(this.youDied, GameObject.Find("UI").transform);
-            deathLabel.name = "YouDied";
-            Debug.Log("Making a death thingy");
-        }
-
-        // Restore castle to full health. 
-        GameObject.Find("Castle").SendMessage("Start");
-        SetLevelGoingForBallistas(false);
-        this.levelEndTime = Time.time+4f;
-        this.isDead = true;
-        this.deathTime = Time.time;
-
-        if (GameControl.control.autoplay)
-        {
-            GameObject.Find("Purchase").SendMessage("Nextlevel");
-        }
-    }
-
-
-
-	void SetupUpgradeMenu(){
-
-		GameObject.Find ("Purchase").SendMessage ("Start");
-		this.isMovingUI = true;
-		this.isMovingUIUp = true;
-
-
-	}
 
 	private float[] GetSpawnRates(int currentLevel){
         float[] getSpawnRates = new float[enemies.Length];

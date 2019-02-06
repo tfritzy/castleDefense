@@ -137,9 +137,10 @@ public class Ballista : MonoBehaviour {
                         this.fireDirection = fireDirection;
                         this.boltInst = null;
                     }
+                    lastAttackTime = Time.time;
+                    loadProgress = 0f;
                 }
-                lastAttackTime = Time.time;
-                loadProgress = 0f;
+                
             }
 
         }

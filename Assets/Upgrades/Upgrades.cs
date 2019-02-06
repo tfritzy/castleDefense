@@ -146,7 +146,7 @@ public class Upgrades : MonoBehaviour {
 	}
 
 	private void NextLevel(){
-		GameObject.Find ("LevelManager").SendMessage ("Go");
+        EventManager.StartLevel();
 
 	}
 
