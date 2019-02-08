@@ -8,6 +8,7 @@ public class Barracks : Tower {
     private int soldierHealth;
     public GameObject soldier;
 
+
     protected override void Initialization()
     {
         level = GameControl.control.barracksLevel;

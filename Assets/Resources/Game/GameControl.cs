@@ -5,6 +5,7 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.UI;
+using Newtonsoft.Json;
 
 public class GameControl : MonoBehaviour {
 
@@ -86,7 +87,10 @@ public class GameControl : MonoBehaviour {
     public int axeTowerLevel;
     public int fireBoltTowerlevel;
 
-	void Awake(){
+    public String[] towers;
+    public int[] towerLevels;
+
+    void Awake(){
 		if (control == null) {
 			control = this;
 			DontDestroyOnLoad (this.gameObject);
@@ -185,6 +189,9 @@ public class GameControl : MonoBehaviour {
         data.axeTowerLevel = GameControl.control.axeTowerLevel;
         data.fireBoltTowerlevel = GameControl.control.fireBoltTowerlevel;
 
+        data.towers = GameControl.control.towers;
+        data.towerLevels = GameControl.control.towerLevels;
+
         Debug.Log("Gamecontrol save");
 		bf.Serialize (file, data);
 		file.Close ();
@@ -280,11 +287,23 @@ public class GameControl : MonoBehaviour {
             this.axeTowerLevel = data.axeTowerLevel;
             this.fireBoltTowerlevel = data.fireBoltTowerlevel;
 
+            this.towers = data.towers;
+            this.towerLevels = data.towerLevels;
+            if (this.towers == null)
+            {
+                this.towers = new string[8];
+            }
+            if (this.towerLevels == null)
+            {
+                this.towerLevels = new int[8];
+            }
+
             if (this.gameLevel == 0) {
 				this.gameLevel = 1;
 			}
 		} else {
 			Debug.Log ("File Does not exist :( ");
+            save();
 		}
 	}
 		
@@ -363,4 +382,7 @@ class PlayerData{
     public int flakTowerLevel;
     public int axeTowerLevel;
     public int fireBoltTowerlevel;
+
+    public String[] towers;
+    public int[] towerLevels;
 }

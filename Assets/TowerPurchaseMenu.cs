@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class TowerPurchaseMenu : MonoBehaviour {
 
-
-
-	// Use this for initialization
-	void Start () {
+    public Tower selectedTower;
+    public GameObject towerDetailsPage;
+    
+    // Use this for initialization
+    void Start () {
 		
 	}
 
@@ -31,6 +32,18 @@ public class TowerPurchaseMenu : MonoBehaviour {
     public void CloseMenu()
     {
         Destroy(GameObject.Find(this.name));
+    }
+
+
+
+    void SetArrowTower()
+    {
+        this.selectedTower = new ArrowTower();
+    }
+
+    void SetDescription()
+    {
+
     }
 
 }

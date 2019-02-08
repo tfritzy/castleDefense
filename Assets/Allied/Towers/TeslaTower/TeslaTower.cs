@@ -13,6 +13,7 @@ public class TeslaTower : Tower {
     public float boltJumpRange;
     private bool isBoltBouncing;
 
+
     protected override void Initialization()
     {
         level = GameControl.control.teslaTowerLevel;

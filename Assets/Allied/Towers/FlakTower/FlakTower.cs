@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlakTower : Tower {
 
+
     protected override void Initialization()
     {
         level = GameControl.control.flakTowerLevel;

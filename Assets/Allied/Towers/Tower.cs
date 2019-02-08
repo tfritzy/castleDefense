@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
 public class Tower : MonoBehaviour {
 
@@ -11,15 +10,22 @@ public class Tower : MonoBehaviour {
     public float range;
     public float attackSpeed;
     public GameObject projectile;
-
     public GameObject target;
     public float lastTargetCheckTime;
+    public int slot;
+    public String description;
+    public static String towerName;
+    public int baseCost;
+
     protected float lastAttackTime;
     protected float projMovementSpeed;
     protected int projectileDamage;
+    protected int levelUpCost;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
+        this.slot = UnityEngine.Random.Range(0, 6);
         Initialization();
 	}
 	
@@ -72,6 +78,33 @@ public class Tower : MonoBehaviour {
     protected virtual void ShootProjectile()
     {
         
+    }
+
+    public int GetCost()
+    {
+        return this.baseCost;
+    }
+
+    public bool Purchase(int slot)
+    {
+        this.slot = slot;
+        SaveState();
+        return true;
+    }
+
+    public bool LevelUp()
+    {
+        level += 1;
+        GameControl.control.gold -= baseCost;
+        SaveState();
+        return true;
+    }
+
+    protected void SaveState()
+    {
+        GameControl.control.towers[slot] = name;
+        GameControl.control.towerLevels[slot] = level;
+        GameControl.control.save();
     }
 
 

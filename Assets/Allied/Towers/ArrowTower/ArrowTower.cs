@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ArrowTower : Tower {
+
+    
 
     protected override void Initialization() {
         level = GameControl.control.arrowTowerLevel;
@@ -13,6 +16,8 @@ public class ArrowTower : Tower {
         isRangedTower = true;
         attackSpeed = 3f * Mathf.Pow(.95f, level);
         projMovementSpeed = 10f + level * 2f;
+        towerName = "ArrowTower";
+
     }
 
     protected override void ShootProjectile()

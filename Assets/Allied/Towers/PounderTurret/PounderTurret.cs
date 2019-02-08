@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PounderTurret : Tower {
 
-    private Animator animator; 
+    private Animator animator;
 
     protected override void Initialization()
     {
