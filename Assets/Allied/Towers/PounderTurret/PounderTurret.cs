@@ -14,7 +14,7 @@ public class PounderTurret : Tower {
         canShootAir = false;
         isRangedTower = false;
         attackSpeed = 7 * Mathf.Pow(.8f, level);
-        animator.speed = 7 / attackSpeed;
+        
         towerName = "PounderTower";
         baseCost = 500;
         towerDescription = "Pounds the ground inflicting heavy damage on nearby enemies. Has very slow attack speed and cannot target air units.";
@@ -30,7 +30,10 @@ public class PounderTurret : Tower {
     public void Pound()
     {
         if (animator == null)
+        {
             animator = this.GetComponent<Animator>();
+            animator.speed = 7 / attackSpeed;
+        }
         Collider2D[] hits = Physics2D.OverlapCircleAll(this.transform.position, range);
         foreach (Collider2D hit in hits)
         {

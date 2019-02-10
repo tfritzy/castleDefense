@@ -100,6 +100,17 @@ public class Tower : MonoBehaviour {
         return true;
     }
 
+    public int GetSellValue()
+    {
+        return baseCost + baseCost * level / 2;
+    }
+
+    public void Sell(int slot)
+    {
+        
+
+    }
+
     public bool LevelUp()
     {
         level += 1;

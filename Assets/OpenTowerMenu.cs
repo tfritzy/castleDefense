@@ -26,10 +26,15 @@ public class OpenTowerMenu : MonoBehaviour {
 
     public void OpenMenu()
     {
+        Vector2 offset = Vector2.zero;
+        if (this.transform.position.y < -1f)
+        {
+            offset += new Vector2(0, 2);
+        }
         if (towerMenuInst == null) {
             towerMenuInst = Instantiate(
                 towerMenu,
-                this.transform.position, 
+                this.transform.position + (Vector3)offset, 
                 new Quaternion(), 
                 GameObject.Find("UI").transform);
             towerMenuInst.SendMessage("SetSlot", slot);

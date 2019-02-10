@@ -8,14 +8,14 @@ public class FireBoltTower : Tower {
 
     public override void Initialization()
     {
-        level = 10; // GameControl.control.fireBoltTowerlevel;
+        level = GameControl.control.fireBoltTowerlevel;
         projectileDamage = 15 + level * 4;
         range = 7 + level;
         canShootAir = true;
         canShootGround = true;
         isRangedTower = true;
         attackSpeed = 6 * Mathf.Pow(.95f, level);
-        projMovementSpeed = 18f;
+        projMovementSpeed = 25f;
         projExplodeRadius = Mathf.Min(.5f + level / 4, 4f);
         towerName = "FireBoltTower";
         baseCost = 600;

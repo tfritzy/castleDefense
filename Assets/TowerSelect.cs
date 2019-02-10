@@ -10,6 +10,7 @@ public class TowerSelect : MonoBehaviour {
     public GameObject buyButton;
     public GameObject inventoryButton;
     public GameObject levelUpButton;
+    public GameObject SellMenu;
 
     public int slot;
 
@@ -66,9 +67,14 @@ public class TowerSelect : MonoBehaviour {
             buyInst.SendMessage("SetSlot", this.slot);
         }
         else
-            buttons.Add(Instantiate(sellButton,
+        {
+            GameObject sellButtonInst = Instantiate(sellButton,
                 this.transform.position + new Vector3(-buttonDistFromThis, 0, 0),
-                new Quaternion(), this.transform));
+                new Quaternion(), this.transform);
+            buttons.Add(sellButtonInst);
+            sellButtonInst.SendMessage("SetSlot", slot);
+        }
+            
     }
 
     private void CloseMenu()

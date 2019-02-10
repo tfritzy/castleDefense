@@ -26,7 +26,7 @@ public class FireBolt : MonoBehaviour {
                 }
             }
             GameObject inst = Instantiate(explosion, this.transform.position, new Quaternion(), null);
-            inst.transform.localScale *= 2;
+            inst.transform.localScale *= 3;
             Destroy(inst, .4f);
             Destroy(this.gameObject);
         }

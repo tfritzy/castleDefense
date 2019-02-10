@@ -41,6 +41,7 @@ public class PurchaseTower : MonoBehaviour {
             Debug.Log("Not enough gold!");
             return;
         }
+        Destroy(this.gameObject);
     }
 
     public void SetSlot(int slot)

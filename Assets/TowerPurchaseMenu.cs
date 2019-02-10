@@ -103,10 +103,10 @@ public class TowerPurchaseMenu : MonoBehaviour {
         if (this.transform.position.x > 0)
             offset = new Vector2(-5f, 0);
         else
-            offset = new Vector2(5f, 0);
-        if (this.transform.position.y < 0)
+            offset = new Vector2(7f, 0);
+        if (this.transform.position.y < -2f)
         {
-            offset = offset + new Vector2(0, 4);
+            offset = offset + new Vector2(0, 2);
         }
         if (towerDetailsPageInst != null)
             Destroy(towerDetailsPageInst);
@@ -127,6 +127,7 @@ public class TowerPurchaseMenu : MonoBehaviour {
             (selectedTowerScript.towerName).ToString();
         towerDetailsPageInst.SendMessage("SetSlot", slot);
         towerDetailsPageInst.SendMessage("SetSelectedTower", selectedTowerScript);
+        Destroy(this.gameObject);
     }
 
     public void SetSlot(int slot)

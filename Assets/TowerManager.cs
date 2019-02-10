@@ -17,6 +17,8 @@ public class TowerManager : MonoBehaviour {
 
     public GameObject[] towerInsts;
 
+    public GameObject sellMenu;
+
 	// Use this for initialization
 	void Start () {
         towers = new Dictionary<string, GameObject>();
@@ -48,6 +50,33 @@ public class TowerManager : MonoBehaviour {
 		
 	}
 
+    void SellTower(int slot)
+    {
+        if (GameControl.control.towers[slot] == null || GameControl.control.towers[slot] == "")
+        {
+            Debug.Log("There was not tower in that slot");
+            return;
+        }
+
+        Tower tower = towerInsts[slot].GetComponent<Tower>();
+        int sellValue = tower.GetSellValue();
+        GameControl.control.AddGold(sellValue);
+        GameControl.control.towers[slot] = "";
+        GameControl.control.towerLevels[slot] = 0;
+        Destroy(towerInsts[slot]);
+        GameControl.control.save();
+    }
+
+    public int GetSellPrice(int slot)
+    {
+        if (towerInsts[slot] == null)
+        {
+            Debug.Log("There is not tower in slot " + slot + " to get the price for");
+            return -1;
+        }
+        return towerInsts[slot].GetComponent<Tower>().GetSellValue();
+    }
+
     public void ConstructTower(int slot)
     {
         if (GameControl.control.towers[slot] == null || GameControl.control.towers[slot] == "")
@@ -74,4 +103,5 @@ public class TowerManager : MonoBehaviour {
             ConstructTower(i);
         }
     }
+
 }
