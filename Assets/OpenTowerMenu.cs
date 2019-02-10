@@ -7,6 +7,8 @@ public class OpenTowerMenu : MonoBehaviour {
     public GameObject towerMenu;
     private GameObject towerMenuInst;
 
+    public int slot;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -17,6 +19,11 @@ public class OpenTowerMenu : MonoBehaviour {
 		
 	}
 
+    public void SetSlot(int slot)
+    {
+        this.slot = slot;
+    }
+
     public void OpenMenu()
     {
         if (towerMenuInst == null) {
@@ -25,6 +32,7 @@ public class OpenTowerMenu : MonoBehaviour {
                 this.transform.position, 
                 new Quaternion(), 
                 GameObject.Find("UI").transform);
+            towerMenuInst.SendMessage("SetSlot", slot);
         }  
     }
 }

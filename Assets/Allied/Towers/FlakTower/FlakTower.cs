@@ -5,7 +5,7 @@ using UnityEngine;
 public class FlakTower : Tower {
 
 
-    protected override void Initialization()
+    public override void Initialization()
     {
         level = GameControl.control.flakTowerLevel;
         projectileDamage = 12 + level;
@@ -14,6 +14,10 @@ public class FlakTower : Tower {
         canShootGround = false;
         isRangedTower = true;
         attackSpeed = 4 * Mathf.Pow(.8f, level);
+        towerName = "FlakTower";
+        baseCost = 350;
+        towerDescription = "Long range tower that can only target air units. Its projectiles are highly explosive. ";
+
     }
 
     protected override void ShootProjectile()

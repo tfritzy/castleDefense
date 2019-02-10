@@ -108,6 +108,7 @@ public class LevelManager: MonoBehaviour {
     void OpenMenu()
     {
         upgradeUIInst = Instantiate(upgradeUI, GameObject.Find("UI").transform);
+
     }
 
     void CloseMenu()

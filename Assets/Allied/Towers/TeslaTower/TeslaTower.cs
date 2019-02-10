@@ -14,7 +14,7 @@ public class TeslaTower : Tower {
     private bool isBoltBouncing;
 
 
-    protected override void Initialization()
+    public override void Initialization()
     {
         level = GameControl.control.teslaTowerLevel;
         projectileDamage = 5 + level * 2;
@@ -26,11 +26,16 @@ public class TeslaTower : Tower {
         projMovementSpeed = 0;
         boltBounceCount = 3 + level;
         boltJumpRange = 2 + level / 2f;
-        bolt = GetComponent<LightningBoltScript>();
+        towerName = "TeslaTower";
+        baseCost = 800;
+        towerDescription = "Fires a bolt of lightning that bounces between enemies. Bolts target both ground and air enemies. Max bounce count = 3 + towerLevel";
+
     }
 
     protected override void ExtraUpdatesFromChildren()
     {
+        if (bolt == null)
+            bolt = GetComponent<LightningBoltScript>();
         BounceLightning();
     }
 

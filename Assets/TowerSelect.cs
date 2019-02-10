@@ -11,6 +11,8 @@ public class TowerSelect : MonoBehaviour {
     public GameObject inventoryButton;
     public GameObject levelUpButton;
 
+    public int slot;
+
     private int buttonDistFromThis = 2;
     private List<GameObject> buttons;
 
@@ -55,10 +57,14 @@ public class TowerSelect : MonoBehaviour {
         buttons.Add(Instantiate(levelUpButton,
             this.transform.position + new Vector3(0, buttonDistFromThis, 0),
             new Quaternion(), this.transform));
-        if (this.tower == null)
-            buttons.Add(Instantiate(buyButton,
+        if (GameControl.control.towers[slot] == null || GameControl.control.towers[slot] == "")
+        {
+            GameObject buyInst = Instantiate(buyButton,
                 this.transform.position + new Vector3(-buttonDistFromThis, 0, 0),
-                new Quaternion(), this.transform));
+                new Quaternion(), this.transform);
+            buttons.Add(buyInst);
+            buyInst.SendMessage("SetSlot", this.slot);
+        }
         else
             buttons.Add(Instantiate(sellButton,
                 this.transform.position + new Vector3(-buttonDistFromThis, 0, 0),
@@ -72,5 +78,10 @@ public class TowerSelect : MonoBehaviour {
             Destroy(buttons[buttons.Count - 1]);
             buttons.RemoveAt(buttons.Count - 1);
         }
+    }
+
+    public void SetTower(GameObject tower)
+    {
+        this.tower = tower;
     }
 }

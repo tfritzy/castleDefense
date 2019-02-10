@@ -6,7 +6,7 @@ public class FlameThrowerTower : Tower {
 
     private float flameDamage;
 
-    protected override void Initialization()
+    public override void Initialization()
     {
         level = GameControl.control.arrowTowerLevel;
         flameDamage = .5f + level / 4f;
@@ -16,6 +16,10 @@ public class FlameThrowerTower : Tower {
         isRangedTower = true;
         attackSpeed = .1f * Mathf.Pow(.95f, level);
         projMovementSpeed = 8f + level * 2f;
+        towerName = "FlameThrowerTower";
+        baseCost = 800;
+        towerDescription = "Produces a beam of fire towards enemies within a short range tower that has high DPS. Can only target ground units.";
+
     }
 
     protected override void ShootProjectile()

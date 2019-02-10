@@ -9,13 +9,17 @@ public class Barracks : Tower {
     public GameObject soldier;
 
 
-    protected override void Initialization()
+    public override void Initialization()
     {
         level = GameControl.control.barracksLevel;
         attackSpeed = 15f * Mathf.Pow(.9f, level);
         soldierAttackDamage = 2 + level;
         soldierHealth = 300 + level * 30;
         lastAttackTime = -1f * attackSpeed + 3f;
+        towerName = "BarracksTower";
+        baseCost = 400;
+        towerDescription = "Trains allied soldiers to fight for your caslte. Soldiers only attack ground units.";
+
     }
 
     protected override void ShootProjectile()

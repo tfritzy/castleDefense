@@ -13,13 +13,13 @@ public class Tower : MonoBehaviour {
     public GameObject target;
     public float lastTargetCheckTime;
     public int slot;
-    public String description;
-    public static String towerName;
+    public String towerName;
     public int baseCost;
+    public int projectileDamage;
+    public String towerDescription;
 
     protected float lastAttackTime;
     protected float projMovementSpeed;
-    protected int projectileDamage;
     protected int levelUpCost;
 
 
@@ -36,7 +36,7 @@ public class Tower : MonoBehaviour {
         ExtraUpdatesFromChildren();
     }
 
-    protected virtual void Initialization()
+    public virtual void Initialization()
     {
 
     }
@@ -82,7 +82,15 @@ public class Tower : MonoBehaviour {
 
     public int GetCost()
     {
-        return this.baseCost;
+        int otherTowerCount = 0;
+        for (int i = 0; i < GameControl.control.towers.Length; i++)
+        {
+            if (GameControl.control.towers[i] == towerName)
+            {
+                otherTowerCount += 1;
+            }
+        }
+        return this.baseCost + baseCost * otherTowerCount;
     }
 
     public bool Purchase(int slot)

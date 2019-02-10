@@ -7,7 +7,7 @@ public class ArrowTower : Tower {
 
     
 
-    protected override void Initialization() {
+    public override void Initialization() {
         level = GameControl.control.arrowTowerLevel;
         projectileDamage = 5 + level * 3;
         range = 4f + level;
@@ -16,7 +16,9 @@ public class ArrowTower : Tower {
         isRangedTower = true;
         attackSpeed = 3f * Mathf.Pow(.95f, level);
         projMovementSpeed = 10f + level * 2f;
-        towerName = "ArrowTower";
+        towerName = "Arrow Tower";
+        baseCost = 450;
+        towerDescription = "Long range, medium attack speed tower that fires arrows. Can target both air and ground units.";
 
     }
 

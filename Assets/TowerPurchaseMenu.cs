@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerPurchaseMenu : MonoBehaviour {
 
-    public Tower selectedTower;
+    public Tower selectedTowerScript;
+    public GameObject selectedTower;
     public GameObject towerDetailsPage;
+
+    public int slot;
+
+    private GameObject towerDetailsPageInst;
     
     // Use this for initialization
     void Start () {
@@ -34,16 +40,98 @@ public class TowerPurchaseMenu : MonoBehaviour {
         Destroy(GameObject.Find(this.name));
     }
 
-
-
-    void SetArrowTower()
+    public void SetArrowTower()
     {
-        this.selectedTower = new ArrowTower();
+        this.selectedTowerScript = new ArrowTower();
+        selectedTowerScript.Initialization();
+        FillDetailsPage();
     }
 
-    void SetDescription()
+    public void SetBarracks()
     {
+        this.selectedTowerScript = new Barracks();
+        selectedTowerScript.Initialization();
+        FillDetailsPage();
+    }
 
+    public void SetFireBoltTower()
+    {
+        this.selectedTowerScript = new FireBoltTower();
+        selectedTowerScript.Initialization();
+        FillDetailsPage();
+    }
+
+    public void SetFlakTower()
+    {
+        this.selectedTowerScript = new FlakTower();
+        selectedTowerScript.Initialization();
+        FillDetailsPage();
+    }
+
+    public void SetFlameTower()
+    {
+        this.selectedTowerScript = new FlameThrowerTower();
+        selectedTowerScript.Initialization();
+        FillDetailsPage();
+    }
+
+    public void SetPounderTower()
+    {
+        this.selectedTowerScript = new PounderTurret();
+        selectedTowerScript.Initialization();
+        FillDetailsPage();
+    }
+
+    public void SetTeslaTower()
+    {
+        this.selectedTowerScript = new TeslaTower();
+        selectedTowerScript.Initialization();
+        FillDetailsPage();
+    }
+
+    public void SetTorrentTower()
+    {
+        this.selectedTowerScript = new TorrentTower();
+        selectedTowerScript.Initialization();
+        FillDetailsPage();
+    }
+
+
+    void FillDetailsPage()
+    {
+        Vector2 offset = Vector2.zero;
+        if (this.transform.position.x > 0)
+            offset = new Vector2(-5f, 0);
+        else
+            offset = new Vector2(5f, 0);
+        if (this.transform.position.y < 0)
+        {
+            offset = offset + new Vector2(0, 4);
+        }
+        if (towerDetailsPageInst != null)
+            Destroy(towerDetailsPageInst);
+        towerDetailsPageInst = Instantiate(towerDetailsPage,
+                                            (Vector2)this.transform.position + offset,
+                                            new Quaternion(),
+                                            GameObject.Find("UI").transform);
+        towerDetailsPageInst.transform.Find("TowerDPSValue").GetComponent<Text>().text =
+            (selectedTowerScript.projectileDamage /
+            selectedTowerScript.attackSpeed).ToString();
+        towerDetailsPageInst.transform.Find("TowerRangeValue").GetComponent<Text>().text =
+            (selectedTowerScript.range * 10f + "m").ToString();
+        towerDetailsPageInst.transform.Find("TowerCostValue").GetComponent<Text>().text =
+            (selectedTowerScript.GetCost()).ToString();
+        towerDetailsPageInst.transform.Find("TowerDescription").GetComponent<Text>().text =
+            (selectedTowerScript.towerDescription).ToString();
+        towerDetailsPageInst.transform.Find("TowerName").GetComponent<Text>().text =
+            (selectedTowerScript.towerName).ToString();
+        towerDetailsPageInst.SendMessage("SetSlot", slot);
+        towerDetailsPageInst.SendMessage("SetSelectedTower", selectedTowerScript);
+    }
+
+    public void SetSlot(int slot)
+    {
+        this.slot = slot;
     }
 
 }

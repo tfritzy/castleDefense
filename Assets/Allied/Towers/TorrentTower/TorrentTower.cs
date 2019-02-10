@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TorrentTower : Tower {
 
-    protected override void Initialization()
+    public override void Initialization()
     {
         level = GameControl.control.torrentTowerLevel;
         projectileDamage = 10 + level;
@@ -13,6 +13,10 @@ public class TorrentTower : Tower {
         canShootGround = true;
         isRangedTower = true;
         attackSpeed = 1 * Mathf.Pow(.8f, level);
+        towerName = "TorrentTower";
+        baseCost = 450;
+        towerDescription = "Fires arcane bolts into the air that come crashing down upon enemies. Deals high damage within small explosion radius. Can only target ground units.";
+
     }
 
     protected override void ShootProjectile()
