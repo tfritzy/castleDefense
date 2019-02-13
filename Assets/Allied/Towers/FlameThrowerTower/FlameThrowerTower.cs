@@ -8,7 +8,7 @@ public class FlameThrowerTower : Tower {
 
     public override void Initialization()
     {
-        level = GameControl.control.arrowTowerLevel;
+        base.Initialization();
         flameDamage = .5f + level / 4f;
         range = Mathf.Min(4f + level/2, 7);
         canShootAir = false;

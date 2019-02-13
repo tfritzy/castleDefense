@@ -8,7 +8,7 @@ public class PounderTurret : Tower {
 
     public override void Initialization()
     {
-        level = GameControl.control.pounderTowerLevel;
+        base.Initialization();
         projectileDamage = 4 + level * 2;
         range = 3 + level / 3;
         canShootAir = false;
@@ -37,7 +37,7 @@ public class PounderTurret : Tower {
         Collider2D[] hits = Physics2D.OverlapCircleAll(this.transform.position, range);
         foreach (Collider2D hit in hits)
         {
-            if (hit.tag != "Enemy")
+            if (!hit.tag.Equals("Enemy"))
                 continue;
             if (hit.GetComponent<Enemy>().isFlyer)
                 continue;

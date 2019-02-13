@@ -22,7 +22,7 @@ public class IceMage : Enemy
         this.soulGemDropChance = 1.5f;
         this.isRangedAttacker = true;
         this.GetComponent<Rigidbody2D>().gravityScale = 0f;
-        this.isFlyer = true;
+        this.isFlyer = false;
         this.rangedProjStartLocation = new Vector3(-.2f, 1f, -.2f);
     }
 

@@ -16,7 +16,7 @@ public class TeslaTower : Tower {
 
     public override void Initialization()
     {
-        level = GameControl.control.teslaTowerLevel;
+        base.Initialization();
         projectileDamage = 5 + level * 2;
         range = 5 + level;
         canShootAir = true;

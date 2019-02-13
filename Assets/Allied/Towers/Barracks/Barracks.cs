@@ -11,7 +11,7 @@ public class Barracks : Tower {
 
     public override void Initialization()
     {
-        level = GameControl.control.barracksLevel;
+        base.Initialization();
         attackSpeed = 15f * Mathf.Pow(.9f, level);
         soldierAttackDamage = 2 + level;
         soldierHealth = 300 + level * 30;

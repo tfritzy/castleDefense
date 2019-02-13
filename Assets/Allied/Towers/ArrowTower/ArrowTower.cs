@@ -8,7 +8,7 @@ public class ArrowTower : Tower {
     
 
     public override void Initialization() {
-        level = GameControl.control.arrowTowerLevel;
+        base.Initialization();
         projectileDamage = 5 + level * 3;
         range = 4f + level;
         canShootAir = true;

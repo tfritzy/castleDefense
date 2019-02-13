@@ -8,7 +8,7 @@ public class FireBoltTower : Tower {
 
     public override void Initialization()
     {
-        level = GameControl.control.fireBoltTowerlevel;
+        base.Initialization();
         projectileDamage = 15 + level * 4;
         range = 7 + level;
         canShootAir = true;

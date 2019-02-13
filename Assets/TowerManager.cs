@@ -18,6 +18,7 @@ public class TowerManager : MonoBehaviour {
     public GameObject[] towerInsts;
 
     public GameObject sellMenu;
+    public int focusedTowerSlot;
 
 	// Use this for initialization
 	void Start () {
@@ -77,6 +78,11 @@ public class TowerManager : MonoBehaviour {
         return towerInsts[slot].GetComponent<Tower>().GetSellValue();
     }
 
+    public void SetFocusedTower(int slot)
+    {
+        this.focusedTowerSlot = slot;
+    }
+
     public void ConstructTower(int slot)
     {
         if (GameControl.control.towers[slot] == null || GameControl.control.towers[slot] == "")
@@ -93,7 +99,9 @@ public class TowerManager : MonoBehaviour {
         GameObject instTower = null;
         towers.TryGetValue(GameControl.control.towers[slot], out instTower);
         GameObject newTower = Instantiate(instTower, position, new Quaternion(), null);
+        newTower.GetComponent<Tower>().slot = slot;
         towerInsts[slot] = newTower;
+        
     }
 
     public void ConstructAllTowers()
@@ -103,5 +111,39 @@ public class TowerManager : MonoBehaviour {
             ConstructTower(i);
         }
     }
+
+    public Tower GetTowerInSlot(int slot)
+    {
+        if (!SlotHasTower(slot))
+            return null;
+        return towerInsts[slot].GetComponent<Tower>();
+    }
+
+    public void LevelUpTower()
+    {
+        Debug.Log("LevelUp");
+        Tower tower = GetTowerInSlot(focusedTowerSlot);
+        if (GameControl.control.gold >= tower.LevelUpCost())
+        {
+            GameControl.control.AddGold(-1 * tower.LevelUpCost());
+            GameControl.control.towerLevels[focusedTowerSlot] += 1;
+            ConstructTower(focusedTowerSlot);
+        }
+        GameControl.control.save();
+        
+    }
+
+    public bool SlotHasTower(int slot)
+    {
+        if (GameControl.control.towers[slot] == null || GameControl.control.towers[slot] == "")
+        {
+            return false;
+        } else
+        {
+            return true;
+        }
+    }
+
+
 
 }

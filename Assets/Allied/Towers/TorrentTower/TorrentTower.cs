@@ -6,7 +6,7 @@ public class TorrentTower : Tower {
 
     public override void Initialization()
     {
-        level = GameControl.control.torrentTowerLevel;
+        base.Initialization();
         projectileDamage = 10 + level;
         range = 6 + level;
         canShootAir = false;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-public class Tower : MonoBehaviour {
+public abstract class Tower : MonoBehaviour {
 
     public int level;
     public bool isRangedTower;
@@ -17,7 +17,7 @@ public class Tower : MonoBehaviour {
     public int baseCost;
     public int projectileDamage;
     public String towerDescription;
-
+    
     protected float lastAttackTime;
     protected float projMovementSpeed;
     protected int levelUpCost;
@@ -25,7 +25,7 @@ public class Tower : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        this.slot = UnityEngine.Random.Range(0, 6);
+        
         Initialization();
 	}
 	
@@ -38,7 +38,7 @@ public class Tower : MonoBehaviour {
 
     public virtual void Initialization()
     {
-
+        level = GameControl.control.towerLevels[slot];
     }
 
     private void CheckNeedTarget()
@@ -111,10 +111,15 @@ public class Tower : MonoBehaviour {
 
     }
 
+    public int LevelUpCost()
+    {
+        return baseCost * (level + 1);
+    }
+
     public bool LevelUp()
     {
         level += 1;
-        GameControl.control.gold -= baseCost;
+        GameControl.control.gold -= baseCost*(level+1);
         SaveState();
         return true;
     }

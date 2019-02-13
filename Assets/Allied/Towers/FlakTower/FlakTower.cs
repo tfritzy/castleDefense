@@ -7,7 +7,7 @@ public class FlakTower : Tower {
 
     public override void Initialization()
     {
-        level = GameControl.control.flakTowerLevel;
+        base.Initialization();
         projectileDamage = 12 + level;
         range = 12 + level;
         canShootAir = true;

@@ -51,13 +51,19 @@ public class TowerSelect : MonoBehaviour {
 
     private void OpenMenu()
     {
-
-        buttons.Add(Instantiate(inventoryButton,
+        if (!(GameControl.control.towers[slot] == null || GameControl.control.towers[slot] == "")) {
+            buttons.Add(Instantiate(inventoryButton,
             this.transform.position + new Vector3(buttonDistFromThis, 0, 0),
             new Quaternion(), this.transform));
-        buttons.Add(Instantiate(levelUpButton,
+        }
+        if (!(GameControl.control.towers[slot] == null || GameControl.control.towers[slot] == "")){
+            GameObject levelUpInst = Instantiate(levelUpButton,
             this.transform.position + new Vector3(0, buttonDistFromThis, 0),
-            new Quaternion(), this.transform));
+            new Quaternion(), this.transform);
+            levelUpInst.SendMessage("SetSlot", slot);
+            buttons.Add(levelUpInst);
+        }
+        
         if (GameControl.control.towers[slot] == null || GameControl.control.towers[slot] == "")
         {
             GameObject buyInst = Instantiate(buyButton,
