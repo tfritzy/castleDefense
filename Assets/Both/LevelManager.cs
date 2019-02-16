@@ -309,7 +309,8 @@ public class LevelManager: MonoBehaviour {
 
                     // Decide whether this is a unique pack
                     bool isUniquePack = false;
-                    if (this.numberOfUniquePacksSpawned < this.numberOfUniquePacksToSpwan && (Time.time > this.lastUniqueSpawnTime + this.timeBetweenUniquePacks))
+                    if (this.numberOfUniquePacksSpawned < this.numberOfUniquePacksToSpwan && 
+                        (Time.time > this.lastUniqueSpawnTime + this.timeBetweenUniquePacks))
                     {
 
                         isUniquePack = true;
@@ -567,7 +568,7 @@ public class LevelManager: MonoBehaviour {
 			if (currentLevel >= startAppearingLevel) {
 				if (currentLevel < startAppearingLevel + 5)
                 {
-                    getSpawnRates[i] = (10f - ((float)(currentLevel - startAppearingLevel)));
+                    getSpawnRates[i] = Mathf.Max((6 - ((float)(currentLevel - startAppearingLevel))), .5f);
                 } else
                 {
                     getSpawnRates[i] = Mathf.Min(100, (currentLevel - startAppearingLevel)*4);

@@ -229,6 +229,7 @@ public abstract class Enemy : MonoBehaviour {
             GameControl.control.totalEnemiesKilled += 1;
             SpawnAbilities();
             updateHealthBar();
+            SpawnItem();
             this.animator.SetBool ("isDead", true);
             // Set the animation speed back to the normal speed in case this enemy is frozen.
             this.transform.Find("Global_CTRL").GetComponent<Animator>().speed = 1f;
@@ -556,6 +557,11 @@ public abstract class Enemy : MonoBehaviour {
             }
             bleedDamageChunks[bleedDamageChunks.Length - 1] = 0;
         }
+    }
+
+    private void SpawnItem()
+    {
+        GameObject.Find("ItemManager").GetComponent<RollItem>().SpawnItem(this.transform.position);
     }
 
 	// Update is called once per frame

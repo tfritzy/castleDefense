@@ -30,7 +30,7 @@ public class PurchaseTower : MonoBehaviour {
         Debug.Log("Tower Name: " + selectedTowerScript.towerName);
         if (GameControl.control.gold >= price)
         {
-            GameControl.control.gold -= price;
+            GameControl.control.AddGold(-1 * price);
             GameControl.control.towers[slot] = selectedTowerScript.towerName;
             GameControl.control.towerLevels[slot] = 0;
             GameControl.control.save();
